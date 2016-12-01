@@ -1,0 +1,81 @@
+p {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.questions {
+	.card {
+		background-color: black;
+		color: white;
+		p {
+			z-index: 3;
+		}
+	}
+}
+
+.answers {
+	.card {
+		background-color: white;
+		border: 1px solid #c7c7c7;
+		color: black;
+	}
+}
+
+.card {
+	height: 250px;
+	width: 180px;
+	margin: 10px;
+    border-radius: 7px;
+	-webkit-box-sizing: border-box;
+	-webkit-box-shadow: 3px 3px 5px grey;
+	-moz-box-shadow: 3px 3px 5px grey;
+	box-shadow: 3px 3px 5px grey;
+	padding: 20px;
+}
+
+.questions, .answers {
+	justify-content: center;
+	width: 100%;
+	margin: 20px auto;
+	height: auto;
+	display: flex;
+	flex-wrap: wrap;
+
+}
+
+.front, .back {
+	font-weight: bold;
+	
+}
+
+.back {
+	font-size: 30px;
+	line-height: 30px;
+
+}
+
+.front {
+	font-size: 15px;
+	line-height: 20px;
+	display: none;
+}
+
+.buttons-container {
+	display: flex;
+	justify-content: center;
+	.button {
+		margin: auto 20px;
+		padding: 10px 20px;
+		-webkit-box-sizing: border-box;
+		-webkit-box-shadow: 1px 1px 1px 1px $neutral;
+		-moz-box-shadow: 1px 1px 1px 1px $neutral;
+		box-shadow: 1px 1px 1px 1px $neutral;
+		border-radius: 5px;
+		background-color: $redDark;
+		color: white;
+	}
+}
