@@ -5,6 +5,7 @@ p {
 
 body {
   font-family: 'Helvetica', 'Arial', sans-serif;
+  background-color: #F1F0D8;
 }
 
 .questions .card {
@@ -17,7 +18,6 @@ body {
 
 .answers .card {
   background-color: white;
-  border: 1px solid #c7c7c7;
   color: black;
 }
 
@@ -63,6 +63,7 @@ body {
   justify-content: center;
 }
 .buttons-container .button {
+  cursor: pointer;
   margin: auto 20px;
   padding: 10px 20px;
   -webkit-box-sizing: border-box;
@@ -70,8 +71,11 @@ body {
   -moz-box-shadow: 1px 1px 1px 1px #B8B8B8;
   box-shadow: 1px 1px 1px 1px #B8B8B8;
   border-radius: 5px;
-  background-color: #E00300;
+  background-color: #D50032;
   color: white;
+}
+.buttons-container .button:hover {
+  background: #A30026;
 }
 
 /* ==========================================================================

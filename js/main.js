@@ -29,6 +29,10 @@ $(document).ready(function(){
 		})
 		
 		assignCards()
+		
+		$("#reshuffle").click(function() {
+			location.reload();
+		});
     });
 	
 	
@@ -54,9 +58,9 @@ $(document).ready(function(){
 			$(".back", this).toggle();  
 			$(".front", this).css("display", "block");
 			
-			$(this).css({	"-moz-box-shadow": "0 0 4px 6px #FF2A00",
-							"-webkit-box-shadow": "0 0 6px 2px #FF2A00",
-							"box-shadow": "0 0 6px 2px #FF2A00"}); 
+			$(this).css({	"-moz-box-shadow": "0 0 4px 6px #D50032",
+							"-webkit-box-shadow": "0 0 6px 2px #D50032",
+							"box-shadow": "0 0 6px 2px #D50032"}); 
 	    }
 	    
 		else {
@@ -73,9 +77,9 @@ $(document).ready(function(){
 
 			$(".back", this).toggle();  
 			$(".front", this).toggle();
-			$(this).css({	"-moz-box-shadow": "0 0 4px 6px #FF2A00",
-							"-webkit-box-shadow": "0 0 6px 2px #FF2A00",
-							"box-shadow": "0 0 6px 2px #FF2A00"}); 
+			$(this).css({	"-moz-box-shadow": "0 0 4px 6px #D50032",
+							"-webkit-box-shadow": "0 0 6px 2px #D50032",
+							"box-shadow": "0 0 6px 2px #D50032"}); 
 	    }
 
  
@@ -107,3 +111,4 @@ function assignCards() {
 	});
 
 }
+

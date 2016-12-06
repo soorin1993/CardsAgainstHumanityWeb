@@ -5,12 +5,15 @@ p {
 
 body {
 	font-family: 'Helvetica', 'Arial', sans-serif;
+	background-color: #F1F0D8;
 }
 
 .questions {
 	.card {
 		background-color: black;
 		color: white;
+// 		border: 1px solid #818181;
+
 		p {
 			z-index: 3;
 		}
@@ -20,7 +23,7 @@ body {
 .answers {
 	.card {
 		background-color: white;
-		border: 1px solid #c7c7c7;
+// 		border: 1px solid #c7c7c7;
 		color: black;
 	}
 }
@@ -69,6 +72,7 @@ body {
 	display: flex;
 	justify-content: center;
 	.button {
+		cursor: pointer;
 		margin: auto 20px;
 		padding: 10px 20px;
 		-webkit-box-sizing: border-box;
@@ -76,7 +80,11 @@ body {
 		-moz-box-shadow: 1px 1px 1px 1px $neutral;
 		box-shadow: 1px 1px 1px 1px $neutral;
 		border-radius: 5px;
-		background-color: $redDark;
+		background-color: $redTint;
 		color: white;
+	}
+	
+	.button:hover {
+		background: $redDark;
 	}
 }
