@@ -5,7 +5,7 @@ p {
 
 body {
 	font-family: 'Helvetica', 'Arial', sans-serif;
-	background-color: #F1F0D8;
+	background-color: $beige;
 }
 
 .questions {
@@ -86,5 +86,53 @@ body {
 	
 	.button:hover {
 		background: $redDark;
+	}
+}
+
+#name-modal {
+
+ 	display: none;	
+	color: $beige;
+	position: fixed;
+	width: 200px;
+    height: 140px;
+    background-color: $redDark;
+    text-align: center;
+    padding: 15px 10px 5px 10px;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;
+
+	#exit {
+		position: absolute;
+		top: 3px;
+		right: 10px;
+		cursor: pointer;
+	}
+
+	#enter {
+		margin-top: 10px;
+		span {
+			cursor: pointer;	
+			border-radius: 3px;
+			padding: 5px 10px;
+			color: $beige;
+			background: black;
+		}
+		
+	}
+
+	p {
+		font-size: 16pt;
+	}
+
+	input {
+		width: 150px;
+		margin: 10px;
 	}
 }

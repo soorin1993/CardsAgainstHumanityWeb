@@ -1,6 +1,9 @@
 var questions = [];
 var answers = [];
 
+var selectedQ;
+var selectedA;
+
 $(document).ready(function(){
 	
 	var config = {
@@ -12,6 +15,7 @@ $(document).ready(function(){
 	};
 	
 	firebase.initializeApp(config);
+	
     var storage = firebase.storage();
 	var storageRef = storage.ref();
 
@@ -19,20 +23,24 @@ $(document).ready(function(){
 		
 		foo = data["blackCards"];
 		$.each(foo, function(index, item) {
-			temp = item["text"]
-			questions.push(temp)
+			temp = item["text"];
+			questions.push(temp);
 		})
 		
 		bar = data["whiteCards"];
 		$.each(bar, function(index, item) {
-			answers.push(item)
+			answers.push(item);
 		})
 		
-		assignCards()
+		assignCards();
 		
 		$("#reshuffle").click(function() {
 			location.reload();
 		});
+		
+		$("#submit").click(function() {
+			firebaseData();
+		}); 
     });
 	
 	
@@ -45,16 +53,18 @@ $(document).ready(function(){
 	    var whichCard = $(this).parent().attr('class');
 	    
 	    if (whichCard == "questions") {
-	    	console.log(this)
 		    $(".questions .card .front").each(function(index, item) {
 			   if($(item).is(":visible")) {
-				   $(this).toggle();
-				   $(this).siblings('.back').toggle();
-				   $(this).parent().css({	"-moz-box-shadow": "",
+				   	$(this).toggle();
+				   	$(this).siblings('.back').toggle();
+
+				   	$(this).parent().css({	"-moz-box-shadow": "",
 									"-webkit-box-shadow": "",
 									"box-shadow": ""}); 
 			   } 
 		    });
+		   	selectedQ = $(".front", this).text();
+
 			$(".back", this).toggle();  
 			$(".front", this).css("display", "block");
 			
@@ -75,6 +85,8 @@ $(document).ready(function(){
 			   } 
 		    });
 
+		   	selectedA = $(".front", this).text();
+		   	
 			$(".back", this).toggle();  
 			$(".front", this).toggle();
 			$(this).css({	"-moz-box-shadow": "0 0 4px 6px #D50032",
@@ -109,6 +121,19 @@ function assignCards() {
 		randomNum -= 1
 		item.innerHTML = answers[randomNum];
 	});
+
+}
+
+function firebaseData() {
+	
+	$("#name-modal").css("display", "block");
+	
+	var database = firebase.database();
+	var storageRef = database.ref();
+	
+	console.log(selectedQ);	
+	console.log(selectedA);
+	storageRef.push({name: name, email: email, team: team, payment: payment});
 
 }
 

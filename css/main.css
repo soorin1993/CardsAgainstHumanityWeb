@@ -78,6 +78,50 @@ body {
   background: #A30026;
 }
 
+#name-modal {
+  display: none;
+  color: #F1F0D8;
+  position: fixed;
+  width: 200px;
+  height: 140px;
+  background-color: #A30026;
+  text-align: center;
+  padding: 15px 10px 5px 10px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+}
+#name-modal #exit {
+  position: absolute;
+  top: 3px;
+  right: 10px;
+  cursor: pointer;
+}
+#name-modal #enter {
+  margin-top: 10px;
+}
+#name-modal #enter span {
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 5px 10px;
+  color: #F1F0D8;
+  background: black;
+}
+#name-modal p {
+  font-size: 16pt;
+}
+#name-modal input {
+  width: 150px;
+  margin: 10px;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
