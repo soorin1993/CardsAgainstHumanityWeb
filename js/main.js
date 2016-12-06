@@ -3,6 +3,18 @@ var answers = [];
 
 $(document).ready(function(){
 	
+	var config = {
+		apiKey: "AIzaSyA3VCbCb47zrLWmFzkCcEv1ZgPhxIQ6qMM",
+		authDomain: "cards-against-humanity-2bb21.firebaseapp.com",
+		databaseURL: "https://cards-against-humanity-2bb21.firebaseio.com",
+		storageBucket: "cards-against-humanity-2bb21.appspot.com",
+		messagingSenderId: "279033261278"
+	};
+	
+	firebase.initializeApp(config);
+    var storage = firebase.storage();
+	var storageRef = storage.ref();
+
 	getData(function(data) {
 		
 		foo = data["blackCards"];
