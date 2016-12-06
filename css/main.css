@@ -6,6 +6,11 @@ p {
 body {
   font-family: 'Helvetica', 'Arial', sans-serif;
   background-color: #F1F0D8;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
 }
 
 .questions .card {
@@ -120,6 +125,93 @@ body {
 #name-modal input {
   width: 150px;
   margin: 10px;
+}
+
+#score-container {
+  overflow-y: auto;
+  padding: 0;
+  border-radius: 10px;
+  display: none;
+  width: 70%;
+  height: 90%;
+  position: fixed;
+  z-index: 1000;
+  background: #A30026;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+}
+#score-container #option-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 12pt;
+  color: #F1F0D8;
+  margin-top: -20px;
+}
+#score-container #option-container #recent, #score-container #option-container #popular {
+  border-radius: 5px;
+  float: left;
+  margin: 0 20px;
+  padding: 7px 12px;
+  background: #B8B8B8;
+  color: #A30026;
+}
+#score-container #option-container #recent {
+  background-color: #F1F0D8;
+}
+#score-container #score {
+  margin: 30px;
+  padding: 0;
+  position: relative;
+  display: none;
+  list-style: none;
+}
+#score-container #score li {
+  margin: 10px 0;
+  width: 100%;
+  height: 200px;
+  background-color: #F1F0D8;
+  border-radius: 5px;
+  padding: 5px;
+}
+#score-container #score li .question_score, #score-container #score li .answer_score {
+  width: 120px;
+  height: 170px;
+  border-radius: 5px;
+  padding: 10px;
+  float: left;
+  margin: 5px 10px 0 10px;
+}
+#score-container #score li .question_score {
+  background-color: black;
+  color: white;
+}
+#score-container #score li .answer_score {
+  background-color: white;
+  color: black;
+}
+#score-container h1 {
+  position: relative;
+  color: #F1F0D8;
+  text-align: center;
+}
+#score-container #exit_score {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  font-size: 25pt;
+  color: black;
+  cursor: pointer;
+  z-index: 100;
 }
 
 /* ==========================================================================
