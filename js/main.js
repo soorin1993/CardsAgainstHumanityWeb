@@ -7,6 +7,8 @@ var userName;
 
 var fireData = [];
 
+var popular = false;
+
 $(document).ready(function(){
 	
 	var config = {
@@ -41,13 +43,38 @@ $(document).ready(function(){
 			location.reload();
 		});
 		
-		$("#submit").click(function() {
-			submitCards();
+		$("#submit").click(function(e) {
+			submitCards(e);
 		}); 
 		
 		$("#score-board").click(function() {
-			loadScores();
+			loadScores(popular);
 		}); 
+		
+		$("#enter").click(function() {
+			$("#name-modal").css("display", "none");	
+			userName = $("#nameText").val();
+			firebaseData();
+		});
+		
+		$("#exit").click( function() {
+			$("#name-modal").css("display", "none");
+		});
+		
+		$("#recent").click(function() {
+			$(this).css("background-color", "#F1F0D8");
+			$("#popular").css("background-color", "#B8B8B8");
+			popular = false;
+			loadScores(popular);
+		});
+		
+		$("#popular").click(function() {
+			$(this).css("background-color", "#F1F0D8");
+			$("#recent").css("background-color", "#B8B8B8");
+			popular = true;
+			loadScores(popular);	
+		});
+		
     });
 	
 	
@@ -131,18 +158,8 @@ function assignCards() {
 
 }
 
-function submitCards() {
-
+function submitCards(e) {
 	$("#name-modal").css("display", "block");
-	$("#enter").click(function() {
-		$("#name-modal").css("display", "none");	
-		userName = $("#nameText").val();
-		firebaseData();
-	});
-	
-	$("#exit").click(function() {
-		$("#name-modal").css("display", "none");
-	});
 }
 
 function firebaseData() {
@@ -158,7 +175,23 @@ function firebaseData() {
 
 }
 
-function loadScores() {
+function loadScores(popular) {
+
+	$("#score").empty();
+
+	var database = firebase.database();
+	var storageRef = database.ref();
+
+	if (popular == true) {
+		storageRef.orderByChild("score").on("child_added", function(snapshot) {
+			createItems(snapshot);
+		});		
+	}
+	else {
+		storageRef.on("child_added", function(snapshot) {
+			createItems(snapshot);
+		});		
+	}
 
 	$("#score-container").css("display", "block");
 
@@ -166,88 +199,80 @@ function loadScores() {
 		$("#score-container").css("display", "none");
 	});
 
-	$("#score").empty();
-
-	var database = firebase.database();
-	var storageRef = database.ref();
-	var scoreList = document.getElementById("score");
-	
-	storageRef.orderByChild("score").on("child_added", function(snapshot){
-
-		var name = snapshot.val().name;
-		var questionData = snapshot.val().question;
-		var answerData = snapshot.val().answer;
-		var scoreVal = snapshot.val().score;
-
-		var item = document.createElement('li');
-
-		var questionCard = document.createElement('div');
-		var questionText = document.createElement('p');
-		questionText.innerHTML = questionData;
-		questionCard.appendChild(questionText);
-		questionCard.className = "question_score";
-		
-		var answerCard = document.createElement('div');
-		var answerText = document.createElement('p');	
-		answerText.innerHTML = answerData;
-		answerCard.appendChild(answerText);
-		answerCard.className = "answer_score";
-		
-		
-		var displayOther = document.createElement('div');
-		
-		var displayUserName = document.createElement('p');
-		displayUserName.innerHTML = name;
-		
-		var displayScore = document.createElement('p');
-		displayScore.innerHTML = scoreVal;
-		
-		var voteButton = document.createElement('span');
-		voteButton.innerHTML = "VOTE";
-		
-		displayOther.appendChild(displayUserName);
-		displayOther.appendChild(displayScore);
-		displayOther.appendChild(voteButton);
-		displayOther.className = "other_score";
-		
-		item.appendChild(questionCard);
-		item.appendChild(answerCard);
-		item.appendChild(displayOther);
-
-		scoreList.appendChild(item);	
-		
-			
-	});		
-	
-
-	
-	
 	setTimeout(function(){
-		$('#score').append($('ol').find('li').get().reverse());
+		if (popular == true) {
+			$('#score').append($('ol').find('li').get().reverse());
+		}		
 		$("#score").css("display", "block");
-
-/*
-		$("#score").css({"display": "block", "padding": "0"});
-		
-		$("#score li").each(function(index, item) {
-// 			$(item).css({"width" : "100%", "height": "200px", "background-color": "#F1F0D8", "border-radius":"5px", "padding":"5px"});
-			$(item).children().each(function(index, item) {
-				if (index == 0) {
-				$(item).css({"width": "120px", "height": "170px", "background-color": "black", "color": "white", "border-radius": "5px", "padding": "10px", "float": "left", "margin":"5px 10px 0 10px"});
-				}
-				else if (index == 1) {
-					$(item).css({"width": "120px", "height": "170px", "background-color": "white", "color": "black", "border-radius": "5px", "padding": "10px", "float": "left"});
-				}
-				
-				else {
-					$(item).css({"width": "120px", "height": "170px", "background-color": "white", "color": "black", "border-radius": "5px", "padding": "10px", "float": "left"});
-				}			
-			});
+		$(".vote-button").click(function(e) {
+		    e.stopPropagation();
+		    
+		    var clickedId = $(this).parent().parent().attr('id');
+		    console.log(clickedId);
+		    
+			var currentScore = +($(this).prev().text());
+			var newScore = currentScore + 1;
+			$(this).prev().text(newScore);
+			
+			var newRef = firebase.database().ref(clickedId);
+			newRef.update({score: newScore});
+			
 		});
-*/
-
-	}, 1000);
-	
+		$("#loading svg").css("display", "none");		
+	}, 700);
 	
 }
 
+function createItems(snapshot) {
+
+	var scoreList = document.getElementById("score");
+
+	var dataId = snapshot.getKey();		
+
+	var name = snapshot.val().name;
+	var questionData = snapshot.val().question;
+	var answerData = snapshot.val().answer;
+	var scoreVal = snapshot.val().score;
+
+	var item = document.createElement('li');
+
+	var questionCard = document.createElement('div');
+	var questionText = document.createElement('p');
+	questionText.innerHTML = questionData;
+	questionCard.appendChild(questionText);
+	questionCard.className = "question_score";
+	
+	var answerCard = document.createElement('div');
+	var answerText = document.createElement('p');	
+	answerText.innerHTML = answerData;
+	answerCard.appendChild(answerText);
+	answerCard.className = "answer_score";
+	
+	
+	var displayOther = document.createElement('div');
+	
+	var displayUserName = document.createElement('p');
+	displayUserName.innerHTML = name;
+	displayUserName.className = "user-name";
+	
+	var displayScore = document.createElement('p');
+	displayScore.innerHTML = scoreVal;
+	displayScore.className = "score-value";
+	
+	var voteButton = document.createElement('span');
+	voteButton.innerHTML = "VOTE";
+	voteButton.className = "vote-button";
+	
+	displayOther.appendChild(displayUserName);
+	displayOther.appendChild(displayScore);
+	displayOther.appendChild(voteButton);
+	displayOther.className = "other_score";
+	
+	item.appendChild(questionCard);
+	item.appendChild(answerCard);
+	item.appendChild(displayOther);
+	item.id = dataId;
+
+	scoreList.appendChild(item);	
+	//counter = counter + 1;
+}

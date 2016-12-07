@@ -15,7 +15,6 @@ body {
 	.card {
 		background-color: black;
 		color: white;
-// 		border: 1px solid #818181;
 
 		p {
 			z-index: 3;
@@ -26,7 +25,6 @@ body {
 .answers {
 	.card {
 		background-color: white;
-// 		border: 1px solid #c7c7c7;
 		color: black;
 	}
 }
@@ -72,8 +70,11 @@ body {
 }
 
 .buttons-container {
+	
 	display: flex;
 	justify-content: center;
+	font-family: 'Bungee', cursive;
+
 	.button {
 		cursor: pointer;
 		margin: auto 20px;
@@ -93,7 +94,9 @@ body {
 }
 
 #name-modal {
-
+	
+	font-family: 'Bungee', cursive;
+	border-radius: 5px;
  	display: none;	
 	color: $beige;
 	position: fixed;
@@ -142,6 +145,7 @@ body {
 
 #score-container {
 	
+	font-family: 'Bungee', cursive;	
 	overflow-y: auto;
 	padding: 0;
 	border-radius: 10px;
@@ -168,7 +172,7 @@ body {
 		font-size: 12pt;
 		color: $beige;
 		margin-top: -20px;
-		
+
 		#recent, #popular {
 			border-radius: 5px;
 			float: left;
@@ -176,6 +180,7 @@ body {
 			padding: 7px 12px;
 			background: $neutral;
 			color: $redDark;
+			cursor: pointer;
 		}
 		
 		#recent {
@@ -190,6 +195,7 @@ body {
 		position: relative;
 		display: none;
 		list-style: none;
+		
 		li {
  			margin: 10px 0;
 			width: 100%;
@@ -197,10 +203,15 @@ body {
 			background-color: #F1F0D8;
 			border-radius: 5px;
 			padding: 5px;
+			-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+			-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+			box-sizing: border-box;	
+			display: flex;
 			
 			.question_score, .answer_score {
+				font-family: 'Helvetica', 'Arial', sans-serif;
 				width: 120px;
-				height: 170px;
+				height: 160px;
 				border-radius: 5px; 
 				padding: 10px;
 				float: left;
@@ -216,14 +227,42 @@ body {
 				background-color: white;
 				color: black;
 			}
+			.other_score {
+				float: left;
+				line-height: 40px;
+				margin-left: 30px;
+				margin-top: 30px;
+				font-size: 20px;
+				
+				.user-name {
+					font-size: 20px;
+					color: black;
+				}
+				
+				.vote-button {
+					cursor: pointer;
+					padding: 5px 8px;
+					border-radius: 3px;
+					font-size: 15px;
+					background-color: $redTint;
+					color: white;
+					text-align: center;
+				}
+				
+				.score-value {
+					font-size: 25px;
+					color: $redTint;
+				}
+			}
 			
 		}
 	}
 
 	h1 {
 		position: relative;
-	    color: $beige;
+	    color: white;
 		text-align: center;
+		font-size: 40px;
 	}
 	
     #exit_score {
@@ -234,5 +273,16 @@ body {
 		color: black;
 		cursor: pointer;
 		z-index: 100;
+    }
+    
+    #loading svg {
+	    width: 100px; 
+	    position: fixed;
+	    z-index: 10000;
+		top: 0;
+	    bottom: 0;
+	    left: 0;
+	    right: 0;
+	    margin: auto;
     }
 }
