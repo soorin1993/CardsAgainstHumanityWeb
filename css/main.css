@@ -139,7 +139,7 @@ body {
   width: 70%;
   height: 90%;
   position: fixed;
-  z-index: 1000;
+  z-index: 2;
   background: #A30026;
   top: 0;
   bottom: 0;
@@ -230,6 +230,7 @@ body {
   background-color: #D50032;
   color: white;
   text-align: center;
+  z-index: 4;
 }
 #score-container #score li .other_score .score-value {
   font-size: 25px;
@@ -248,12 +249,12 @@ body {
   font-size: 25pt;
   color: black;
   cursor: pointer;
-  z-index: 100;
+  z-index: 3;
 }
 #score-container #loading svg {
   width: 100px;
   position: fixed;
-  z-index: 10000;
+  z-index: 5;
   top: 0;
   bottom: 0;
   left: 0;

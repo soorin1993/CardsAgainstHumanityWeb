@@ -167,15 +167,13 @@ function firebaseData() {
 	var database = firebase.database();
 	var storageRef = database.ref();
 	
-	console.log(selectedQ);	
-	console.log(selectedA);
-	console.log(userName);
-	
 	storageRef.push({name: userName, question: selectedQ, answer: selectedA, score: 0});
 
 }
 
 function loadScores(popular) {
+
+	$("#loading svg").css("display", "block");		
 
 	$("#score").empty();
 
